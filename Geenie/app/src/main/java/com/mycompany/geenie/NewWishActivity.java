@@ -1,27 +1,26 @@
 package com.mycompany.geenie;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+ import java.text.DecimalFormat;
+ import java.text.NumberFormat;
+ import java.text.SimpleDateFormat;
+ import java.util.Date;
 
-import android.app.Activity;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.mycompany.geenie.R;
-
-import Receiver.ProximityIntentReceiver;
+ import android.app.Activity;
+ import android.app.PendingIntent;
+ import android.content.Context;
+ import android.content.Intent;
+ import android.content.IntentFilter;
+ import android.content.SharedPreferences;
+ import android.location.Location;
+ import android.location.LocationListener;
+ import android.location.LocationManager;
+ import android.os.Bundle;
+ import android.view.View;
+ import android.view.View.OnClickListener;
+ import android.widget.Button;
+ import android.widget.EditText;
+ import android.widget.Toast;
+ import Receiver.ProximityIntentReceiver;
 
 public class NewWishActivity extends Activity {
 
@@ -68,6 +67,12 @@ public class NewWishActivity extends Activity {
         findCoordinatesButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy hh:mm:ss");
+                String timestamp = sdf.format(new Date());
+
+                Toast.makeText(getApplicationContext(), timestamp, Toast.LENGTH_LONG).show();
+
                 populateCoordinatesFromLastKnownLocation();
             }
         });
@@ -110,10 +115,15 @@ public class NewWishActivity extends Activity {
     }
 
     private void populateCoordinatesFromLastKnownLocation() {
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (location!=null) {
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location!=null) {
             latitudeEditText.setText(nf.format(location.getLatitude()));
             longitudeEditText.setText(nf.format(location.getLongitude()));
+
+                String latitude = nf.format(location.getLatitude());
+                String longitude = nf.format(location.getLongitude());
+
+                Toast.makeText(getApplicationContext(), latitude+" and "+longitude, Toast.LENGTH_LONG).show();
         }
     }
 
