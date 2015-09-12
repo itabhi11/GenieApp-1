@@ -53,17 +53,21 @@ public class SearchResultActivity extends Activity {
 
                 View layout = layoutInflator.inflate(R.layout.custom_toast,
                         (ViewGroup) findViewById(R.id.toast_layout_root));
-
+/*
                 ImageView iv = (ImageView) layout.findViewById(R.id.toast_iv);
-                TextView tv = (TextView) layout.findViewById(R.id.toast_tv);
+                TextView tv = (TextView) layout.findViewById(R.id.toast_tv);*/
 
-                iv.setBackgroundResource(thumb[pos]);
-                tv.setText(title[pos]);
+                //iv.setBackgroundResource(thumb[pos]);
+                // tv.setText("selected item is "+title[pos]);
+                String clickedTitle = title[pos];
 
-                Toast toast = new Toast(getApplicationContext());
+                Toast.makeText(getApplicationContext(), clickedTitle,
+                        Toast.LENGTH_LONG).show();
+
+                /*Toast toast = new Toast(getApplicationContext());
                 toast.setView(layout);
                 toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                toast.show();*/
             }
         });
 
